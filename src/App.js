@@ -10,7 +10,7 @@ import './App.css';
 import { useStateContext } from './contexts/ContextProvider';
 
 const App = () => {
-  const { activeMenu, themeSettings ,setThemeSettings} = useStateContext();
+  const { activeMenu, themeSettings ,setThemeSettings,currentColor,currentMode} = useStateContext();
 
   // useEffect(() => {
   //   const currentThemeColor = localStorage.getItem('colorMode');
@@ -22,7 +22,7 @@ const App = () => {
   // }, []);
 
   return (
-    <div >
+    <div className={currentMode === 'Dark'? 'dark' : ''}>
       <BrowserRouter>
         <div className="flex relative dark:bg-main-dark-bg">
           <div className="fixed right-4 bottom-4" style={{ zIndex: '1000' }}>
@@ -33,8 +33,8 @@ const App = () => {
               <button
                 type="button"
                 onClick={() => {setThemeSettings(!themeSettings)}}
-                // style={{ background: currentColor, borderRadius: '50%' }}
-                className="text-3xl p-3 hover:drop-shadow-xl text-white bg-[blue] rounded-full"
+                style={{ background: currentColor, }}
+                className="text-3xl p-3 hover:drop-shadow-xl text-white  rounded-full"
               >
                 <FiSettings />
               </button>
@@ -51,13 +51,13 @@ const App = () => {
             </div>
           )}
           <div
-            className={
-              activeMenu
-                ? 'dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  '
-                : 'bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 '
+            className={`bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen
+              ${activeMenu
+                ? 'md:ml-72   '
+                : ' flex-2 '}`
             }
           >
-            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
+            <div className="fixed md:static  bg-main-bg dark:bg-main-dark-bg navbar w-full ">
               <Navbar />
             </div>
             <div>
